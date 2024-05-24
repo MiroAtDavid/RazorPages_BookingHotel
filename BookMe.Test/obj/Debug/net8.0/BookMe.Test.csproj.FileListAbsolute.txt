@@ -183,3 +183,4 @@
 /home/hu/RiderProjects/BookMe/BookMe.Test/obj/Debug/net8.0/BookMe.Test.pdb
 /home/hu/RiderProjects/BookMe/BookMe.Test/obj/Debug/net8.0/BookMe.Test.genruntimeconfig.cache
 /home/hu/RiderProjects/BookMe/BookMe.Test/obj/Debug/net8.0/ref/BookMe.Test.dll
+/home/hu/RiderProjects/BookMe/BookMe.Test/obj/Debug/net8.0/BookMe.Test.sourcelink.json

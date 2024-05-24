@@ -10,3 +10,4 @@
 /home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.pdb
 /home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/ref/BookMe.Application.dll
 /home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.csproj.AssemblyReference.cache
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.sourcelink.json
