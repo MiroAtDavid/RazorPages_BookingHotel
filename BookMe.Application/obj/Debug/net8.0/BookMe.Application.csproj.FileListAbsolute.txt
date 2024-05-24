@@ -1,0 +1,12 @@
+/home/hu/RiderProjects/BookMe/BookMe.Application/bin/Debug/net8.0/BookMe.Application.deps.json
+/home/hu/RiderProjects/BookMe/BookMe.Application/bin/Debug/net8.0/BookMe.Application.dll
+/home/hu/RiderProjects/BookMe/BookMe.Application/bin/Debug/net8.0/BookMe.Application.pdb
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.AssemblyInfoInputs.cache
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.AssemblyInfo.cs
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.csproj.CoreCompileInputs.cache
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.dll
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/refint/BookMe.Application.dll
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.pdb
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/ref/BookMe.Application.dll
+/home/hu/RiderProjects/BookMe/BookMe.Application/obj/Debug/net8.0/BookMe.Application.csproj.AssemblyReference.cache
