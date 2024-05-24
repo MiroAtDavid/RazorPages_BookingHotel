@@ -7,7 +7,7 @@ public class Employee {
     public decimal Salary { get; set; }
     public int AddressId { get; set; }
     public virtual Address Address { get; private set; }
-    public int HotelId { get; private set; }
+    public Guid HotelId { get; private set; }
     public virtual Hotel Hotel { get; private set; }
     public string Role { get; protected set; }
 

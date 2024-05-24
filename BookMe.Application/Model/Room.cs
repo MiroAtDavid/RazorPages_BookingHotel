@@ -4,8 +4,8 @@ public class Room {
     
     public int Id { get; private set; }
     public decimal Price { get; set; }
-    public int HotelId { get; private set; }
-    public Hotel Hotel { get; private set; }
+    public Guid HotelId { get; set; }
+    public Hotel Hotel { get; set; }
     public string RoomType { get; set; }
     
     // Constructor with properties

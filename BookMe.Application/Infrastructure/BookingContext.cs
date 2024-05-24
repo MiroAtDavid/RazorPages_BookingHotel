@@ -17,6 +17,7 @@ public class BookingContext : DbContext {
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         
         // Hotel
+        modelBuilder.Entity<Hotel>().HasKey(Hotel => Hotel.Guid); 
         modelBuilder.Entity<Hotel>()
             .HasMany(h => h.HotelRooms)
             .WithOne(r => r.Hotel)
@@ -50,8 +51,6 @@ public class BookingContext : DbContext {
             
         // Booking
         modelBuilder.Entity<Booking>().HasKey(booking => booking.Guid); 
-        modelBuilder.Entity<Booking>()
-                .HasMany(b => b.Rooms);
         
         // Address
         modelBuilder.Entity<Address>().HasKey(address => address.Id);
@@ -61,10 +60,10 @@ public class BookingContext : DbContext {
     // Creating Test Data with Bogus Faker
     public void Seed() {
         
-        // random sed num for database
+        // Random sed num for database
         Randomizer.Seed = new Random(1358);
 
-        // address data with faker
+        // Address data with faker
         var addresses = new Faker<Address>("de").CustomInstantiator(f => new Address(
             street: f.Address.StreetAddress(),
             zip: f.Address.ZipCode(),
@@ -75,7 +74,7 @@ public class BookingContext : DbContext {
         Addresses.AddRange(addresses);
         SaveChanges();
 
-        // guests data with faker
+        // Guests data with faker
         var guests = new Faker<Guest>("de").CustomInstantiator(f => new Guest(
                 firstName: f.Name.FirstName(),
                 lastName: f.Name.LastName(),
@@ -87,7 +86,7 @@ public class BookingContext : DbContext {
         Guests.AddRange(guests);
         SaveChanges();
         
-        // hotel data with faker
+        // Hotel data with faker
         var hotels = new Faker<Hotel>("de").CustomInstantiator(f => new Hotel(
                 name: f.Company.CompanyName(),
                 stars: f.PickRandom<Stars>(),
@@ -98,7 +97,7 @@ public class BookingContext : DbContext {
         Hotels.AddRange(hotels);
         SaveChanges();
         
-        // employee data with faker
+        // Employee data with faker
         var employees = new Faker<Employee>("de").CustomInstantiator(f => new Employee(
                 firstName: f.Name.FirstName(),
                 lastName: f.Name.LastName(),
@@ -111,7 +110,7 @@ public class BookingContext : DbContext {
         Employees.AddRange(employees);
         SaveChanges();
         
-        // room data with faker
+        // Room data with faker
         var rooms = new Faker<Room>("de").CustomInstantiator(f => new Room(
                 price: f.Finance.Amount(50, 500),
                 hotel: f.Random.ListItem(hotels),
@@ -122,12 +121,13 @@ public class BookingContext : DbContext {
         Rooms.AddRange(rooms);
         SaveChanges();
         
-        // booking data with faker
+        // Bookings data with faker
         var bookings = new Faker<Booking>("de").CustomInstantiator(f => new Booking(
                 hotel: f.Random.ListItem(hotels),
                 date: new DateTime(2024, 6, 1).AddDays(f.Random.Int(0, 4 * 30)),
                 bookingDuration: f.Random.Int(1, 14),
-                guest: f.Random.ListItem(guests)
+                guest: f.Random.ListItem(guests),
+                room: f.Random.ListItem(rooms)
             ))
             .Generate(100)
             .ToList();

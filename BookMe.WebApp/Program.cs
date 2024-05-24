@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<BookingContext>(opt => {
-    opt.UseSqlite("Data Source=teams.db");
+    opt.UseSqlite("Data Source=bookings.db");
 });
 
 builder.Services.AddRazorPages();

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace BookMe.Model;
 
 public class Hotel {
-    public int Id { get; private set; }
+    public Guid Guid { get; private set; }
     public string Name { get; set; }
     public Stars Stars { get; set; }
 
@@ -19,6 +19,7 @@ public class Hotel {
     
     // Constructor 
     public Hotel(string name, Stars stars, Address address) {
+        Guid = new Guid();
         Name = name;
         Stars = stars;
         Address = address;
