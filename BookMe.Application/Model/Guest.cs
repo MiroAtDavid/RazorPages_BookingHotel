@@ -1,7 +1,7 @@
 namespace BookMe.Model;
 
-public class Guest {
-    public Guid Guid { get; private set; }
+public class Guest : IEntity<Guid> {
+    public Guid Id { get; private set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public int AddressId { get; set; }
@@ -13,7 +13,7 @@ public class Guest {
     
     // Constructor 
     public Guest(string firstName, string lastName, string email, Address address) {
-        Guid = new Guid();
+        Id = new Guid();
         FirstName = firstName;
         LastName = lastName;
         Email = email;

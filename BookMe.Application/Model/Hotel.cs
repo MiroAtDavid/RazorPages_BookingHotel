@@ -2,11 +2,10 @@ using System.Runtime.InteropServices;
 
 namespace BookMe.Model;
 
-public class Hotel {
-    public Guid Guid { get; private set; }
+public class Hotel : IEntity<Guid> {
+    public Guid Id { get; private set; }
     public string Name { get; set; }
     public Stars Stars { get; set; }
-
     public int AddressId { get; set; }
     public virtual Address Address { get; private set; }
     protected List<Room> _hotelRooms = new();
@@ -19,7 +18,7 @@ public class Hotel {
     
     // Constructor 
     public Hotel(string name, Stars stars, Address address) {
-        Guid = new Guid();
+        Id = new Guid();
         Name = name;
         Stars = stars;
         Address = address;

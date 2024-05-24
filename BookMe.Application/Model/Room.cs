@@ -1,6 +1,6 @@
 namespace BookMe.Model;
 
-public class Room {
+public class Room : IEntity<int>{
     
     public int Id { get; private set; }
     public decimal Price { get; set; }

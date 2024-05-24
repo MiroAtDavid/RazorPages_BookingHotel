@@ -5,7 +5,7 @@ namespace BookMe.Model;
 
 // this is an address record
 // helps us implement quickly an immutable address with propperties
-public class Address{
+public class Address : IEntity<int>{
     public int Id { get; private set; }
     public string Street { get; set; }
     public string Zip { get; set; }

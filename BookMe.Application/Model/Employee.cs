@@ -1,7 +1,7 @@
 namespace BookMe.Model;
 
-public class Employee {
-    public Guid Guid { get; private set; }
+public class Employee : IEntity<Guid> {
+    public Guid Id { get; private set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public decimal Salary { get; set; }
@@ -13,7 +13,7 @@ public class Employee {
 
     // Construcotor
     public Employee(string firstName, string lastName, decimal salary, Address address, Hotel hotel) {
-        Guid = new Guid();
+        Id = new Guid();
         FirstName = firstName;
         LastName = lastName;
         Salary = salary;

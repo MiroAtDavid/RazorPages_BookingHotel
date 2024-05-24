@@ -17,7 +17,7 @@ public class BookingContext : DbContext {
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         
         // Hotel
-        modelBuilder.Entity<Hotel>().HasKey(Hotel => Hotel.Guid); 
+        modelBuilder.Entity<Hotel>().HasKey(Hotel => Hotel.Id); 
         modelBuilder.Entity<Hotel>()
             .HasMany(h => h.HotelRooms)
             .WithOne(r => r.Hotel)
@@ -38,11 +38,11 @@ public class BookingContext : DbContext {
         modelBuilder.Entity<Room>().HasDiscriminator(h => h.RoomType);
 
         // Employee
-        modelBuilder.Entity<Employee>().HasKey(employee => employee.Guid); 
+        modelBuilder.Entity<Employee>().HasKey(employee => employee.Id); 
         modelBuilder.Entity<Employee>().HasDiscriminator(h => h.Role);
             
         // Guest
-        modelBuilder.Entity<Guest>().HasKey(guest => guest.Guid); 
+        modelBuilder.Entity<Guest>().HasKey(guest => guest.Id); 
         modelBuilder.Entity<Guest>()
                 .HasMany(g => g.Bookings)
                 .WithOne(b => b.Guest)
@@ -50,7 +50,7 @@ public class BookingContext : DbContext {
                 .IsRequired();
             
         // Booking
-        modelBuilder.Entity<Booking>().HasKey(booking => booking.Guid); 
+        modelBuilder.Entity<Booking>().HasKey(booking => booking.Id); 
         
         // Address
         modelBuilder.Entity<Address>().HasKey(address => address.Id);
