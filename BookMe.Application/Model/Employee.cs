@@ -2,7 +2,7 @@ namespace BookMe.Model;
 
 public class Employee : IEntity<Guid> {
     public Guid Id { get; private set; }
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } 
     public string LastName { get; set; }
     public decimal Salary { get; set; }
     public int AddressId { get; set; }
