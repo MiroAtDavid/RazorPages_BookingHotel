@@ -81,7 +81,7 @@ public class BookingContext : DbContext {
                 email: f.Internet.Email(),
                 address: f.Random.ListItem(addresses)
             ))
-            .Generate(100)
+            .Generate(400)
             .ToList();
         Guests.AddRange(guests);
         SaveChanges();
@@ -92,7 +92,7 @@ public class BookingContext : DbContext {
                 stars: f.PickRandom<Stars>(),
                 address: f.Random.ListItem(addresses)
             ))
-            .Generate(100)
+            .Generate(20)
             .ToList();
         Hotels.AddRange(hotels);
         SaveChanges();
@@ -116,7 +116,7 @@ public class BookingContext : DbContext {
                 hotel: f.Random.ListItem(hotels),
                 roomType: f.PickRandom<string>(new[] { "Single", "Double", "Suite" })
             ))
-            .Generate(100)
+            .Generate(400)
             .ToList();
         Rooms.AddRange(rooms);
         SaveChanges();
@@ -129,7 +129,7 @@ public class BookingContext : DbContext {
                 guest: f.Random.ListItem(guests),
                 room: f.Random.ListItem(rooms)
             ))
-            .Generate(100)
+            .Generate(300)
             .ToList();
         Bookings.AddRange(bookings);
         SaveChanges();

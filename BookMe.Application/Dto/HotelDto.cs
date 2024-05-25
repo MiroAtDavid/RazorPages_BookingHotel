@@ -3,9 +3,11 @@ using Address = Bogus.DataSets.Address;
 
 namespace BookMe.Dto;
 
+// TODO verification
 public record HotelDto(
-        Guid Guid,
+        Guid Id,
         string Name,
         Stars Stars,
-        Address Address
+        Address Address,
+        int? BookingsCount
     );

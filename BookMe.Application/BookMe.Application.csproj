@@ -6,8 +6,8 @@
         <Nullable>enable</Nullable>
         <RootNamespace>BookMe</RootNamespace>
     </PropertyGroup>
-
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
       <PackageReference Include="Bogus" Version="35.5.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.4.24267.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.0-preview.4.24267.1" />

@@ -1,4 +1,6 @@
+using BookMe.Dto;
 using BookMe.Infrastructure;
+using BookMe.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 // Erstellen und seeden der Datenbank
@@ -18,6 +20,14 @@ builder.Services.AddDbContext<BookingContext>(opt => {
     opt.UseSqlite("Data Source=bookings.db");
 });
 
+builder.Services.AddTransient<HotelRepository>();
+builder.Services.AddTransient<BookingRepository>();
+builder.Services.AddTransient<EmployeeRepository>();
+builder.Services.AddTransient<RoomRepository>();
+builder.Services.AddTransient<GuestRepository>();
+builder.Services.AddTransient<AddressRepository>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddRazorPages();
 
 // Configure the HTTP request pipeline.

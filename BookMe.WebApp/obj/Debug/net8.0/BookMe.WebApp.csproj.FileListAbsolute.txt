@@ -78,3 +78,4 @@
 /home/hu/RiderProjects/BookMe/BookMe.WebApp/bin/Debug/net8.0/BookMe.Application.dll
 /home/hu/RiderProjects/BookMe/BookMe.WebApp/bin/Debug/net8.0/BookMe.Application.pdb
 /home/hu/RiderProjects/BookMe/BookMe.WebApp/obj/Debug/net8.0/BookMe.WebApp.sourcelink.json
+/home/hu/RiderProjects/BookMe/BookMe.WebApp/bin/Debug/net8.0/AutoMapper.dll

@@ -1,0 +1,65 @@
+@page
+@model BookMe.WebApp.Pages.Hotels.IndexModel
+@section head {
+    <style>
+        .closed {
+            background-color: #efecec;
+        }
+    </style>
+}
+<h3>Hotels</h3>
+<p>@Model.Hotels.Count Hotels found. Created at @DateTime.Now.ToString("HH:mm").</p>
+
+@if(!string.IsNullOrEmpty(Model.Message))
+{
+<div class="border border-danger p-3 border-3">
+    <p class="mb-0">@Model.Message</p>
+</div>
+}
+
+<table class="table table-sm">
+    <thead>
+        <tr>    
+            <th>Name</th>
+            <th>Stars</th>
+            <th>City</th>
+            <th>Boookings</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var h in Model.Hotels)
+    {
+        var cssClass = h.BookingsCount < 10 ? "closed" : "";
+        <tr class="@cssClass">
+            <td>@h.Name</td>
+            <td>
+                @{ int starCount = (int)@h.Stars; }
+                    @for (int i = 1; i <= 5; i++) {
+                        if (i <= starCount) {
+                            <span class="fa fa-star checked"></span>
+                        } else {
+                            <span class="fa fa-star"></span>
+                        }
+                    }
+            </td>
+            <td>@h.Address.City</td>
+            <td>@h.BookingsCount</td>
+            <td>
+                <a class="ms-2" asp-page="/Hotels/Details" asp-route-guid="@h.Id"><i class="fa-solid fa-circle-info"></i></a>
+                <a class="ms-2" asp-page="/Hotels/Edit" asp-route-guid="@h.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a class="ms-2" asp-page="/Hotels/Delete" asp-route-guid="@h.Id"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+        <style>
+    .fa-star {
+        color: black;
+    }
+
+    .fa-star.checked {
+        color: #3b73bc;
+    }
+</style>
+    }
+    </tbody>
+</table>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookMe.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59b32e56b6cc738cc921b3025c44d2a82b1e1884")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0233340d31f12a13c966ef82f936cf6b3b69e457")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookMe.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookMe.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

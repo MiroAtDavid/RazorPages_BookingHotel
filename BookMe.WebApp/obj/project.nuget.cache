@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ME0CSUrqOqv1pTyk7l0ZpGjB1zJcwpm3xloJkEe4mu+y3rjFd6SgHA8RERyktVdyVVyuI2BZdEWCMTC0ScRpwQ==",
+  "dgSpecHash": "L3zTmBOekcFBZChGbCCYGRao9Z6abPPRd/3Q2iCFJFQJ7eQaqjOveZkuZEa7A1fVxCdPHSBdyUue7Rqn5BlUfQ==",
   "success": true,
   "projectFilePath": "/home/hu/RiderProjects/BookMe/BookMe.WebApp/BookMe.WebApp.csproj",
   "expectedPackageFiles": [
+    "/home/hu/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/home/hu/.nuget/packages/bogus/35.5.1/bogus.35.5.1.nupkg.sha512",
     "/home/hu/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/home/hu/.nuget/packages/microsoft.data.sqlite.core/9.0.0-preview.4.24267.1/microsoft.data.sqlite.core.9.0.0-preview.4.24267.1.nupkg.sha512",

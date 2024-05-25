@@ -30,11 +30,11 @@ public class BookingContextTest {
         db.Seed();
         // Multiple assert statements should be avoided in real unit tests, but in this case
         // the database is tested, not the program logic.
-        Assert.True(db.Rooms.Count() == 100);
+        Assert.True(db.Rooms.Count() == 400);
         Assert.True(db.Addresses.Count() == 100);
-        Assert.True(db.Hotels.Count() == 100);
+        Assert.True(db.Hotels.Count() == 20);
         Assert.True(db.Employees.Count() == 100);
-        Assert.True(db.Guests.Count() == 100);
-        Assert.True(db.Bookings.Count() == 100);
+        Assert.True(db.Guests.Count() == 400);
+        Assert.True(db.Bookings.Count() == 300);
     }
 }

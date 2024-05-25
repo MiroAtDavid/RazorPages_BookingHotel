@@ -9,7 +9,7 @@ public class HotelRepository : Repository<Hotel, Guid>
         string Name,
         Stars Stars,
         Address Address,
-        int BookingsCount);
+        int? BookingsCount);
     
     public HotelRepository(BookingContext db) : base(db) {}
 

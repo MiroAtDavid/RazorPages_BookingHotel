@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vcnogpT7b8jVf8YPR3+zi5pZGMHrEJ8lK1gyRr6NoDPof+Z6xJsExOgnnvK73yglJkr6w64RxwzglSxc2kKSIQ==",
+  "dgSpecHash": "Zy+vSH7qtRBUFC/Rqi/wBos7vN/lFWb2QLBc9w8qMcP6bpZcJRGjifMOe14UXf/hZN33TTpau7ZehKZKn6bCag==",
   "success": true,
   "projectFilePath": "/home/hu/RiderProjects/BookMe/BookMe.Test/BookMe.Test.csproj",
   "expectedPackageFiles": [
+    "/home/hu/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/home/hu/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/home/hu/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
     "/home/hu/.nuget/packages/bogus/35.5.1/bogus.35.5.1.nupkg.sha512",
