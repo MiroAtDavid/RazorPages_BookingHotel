@@ -1,19 +1,43 @@
-@page
+@page "{guid}"
 @model BookMe.WebApp.Pages.Hotels.Delete
+<h3>Hotel @Model.Hotel.Name</h3>
 
-@{
-    Layout = null;
-}
+<h4>Delete Bookings</h4>
+<form method="post" asp-page-handler="EditBooking">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th>Guest</th>
+            <th>-</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th>Days</th>
+            <th>Room Type</th>
+            <th>Room Price</th>
+            <th>Booking Price</th>
+            <th>Delete?</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var b in Model.Hotel.Bookings.OrderBy(b => b.Date)) {
+        <tr>
+            <td>@b.Guest.LastName</td>
+            <td>@b.Guest.FirstName</td>
+            <td>@b.Guest.Email</td>
+            <td>@b.Date</td>
+            <td>@b.BookingDuration</td>
+            <td>@b.Room.RoomType</td>
+            <td>@b.Room.Price</td>
+            <td>@b.BookingPrice</td>
+            <td>
+                <input class="form-check-input" asp-for="BookingsToDelete[b.Id]" />
+            </td>
+        </tr>
+        }
+        </tbody>
+    </table>
+    <button
+        type="submit" class="btn btn-danger"
+        asp-page-handler="Delete">Delete Selected</button>
+</form>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>

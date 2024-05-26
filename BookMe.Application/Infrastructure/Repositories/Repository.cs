@@ -35,6 +35,7 @@ public abstract class Repository<TEntity, TKey> where TEntity : class, IEntity<T
         if (!HasPrimaryKey(entity)) {
             return (false, "Missing primary key.");
         }
+        _db.Set<TEntity>().Attach(entity);
         _db.Entry(entity).State = EntityState.Modified;
         try {
             _db.SaveChanges();

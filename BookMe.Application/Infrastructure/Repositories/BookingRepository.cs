@@ -11,8 +11,7 @@ public class BookingRepository : Repository<Booking, Guid> {
     }
 
     public (bool success, string message) 
-        Create(DateTime dateTime, Guid guestId, Guid hotelId, int roomId, int bookingDuration)
-    {
+        Create(DateTime dateTime, Guid guestId, Guid hotelId, int roomId, int bookingDuration) {
         var guest = _db.Guests.FirstOrDefault(g => g.Id == guestId);
         if (guest is null)
             return (false, "Guest doesn't exist.");

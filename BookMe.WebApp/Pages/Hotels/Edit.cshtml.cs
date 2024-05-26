@@ -44,6 +44,7 @@ public class Edit : PageModel {
     [FromRoute] public Guid Guid { get; set; }
 
     public Hotel? Hotel { get; set; }
+    public string? Message { get; set; }
     public Booking NewBooking { get; set; }
     public IReadOnlyList<Booking> Bookings { get; private set; } = new List<Booking>();
     public Dictionary<Guid, BookingDto> EditBokings { get; set; } = new();
@@ -73,7 +74,7 @@ public class Edit : PageModel {
 
     public IActionResult OnPostEditBooking(Guid id, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
         if (!ModelState.IsValid) { return Page(); }
-        var booking = _bookings.FindById(bookingId);
+        var booking = _bookings.FindById(id);
         if (booking is null) {
             return RedirectToPage();
         }
@@ -89,7 +90,19 @@ public class Edit : PageModel {
     public IActionResult OnGet(Guid guid) {
         return Page();
     }
-
+    
+    public IActionResult OnPostDelete(Guid guid)
+    {
+        var booking = _bookings.FindById(guid);
+        if (booking is null)
+        {
+            return RedirectToPage("/Hotels/Index");
+        }
+        var (success, message) = _bookings.Delete(booking);
+        if (!success) { Message = message; }
+        return RedirectToPage("/Hotels/Index");
+    }
+    
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context) {
         // SELECT * FROM Stores INNER JOIN Offers ON (...)
         // INNER JOIN Product ON (...)
@@ -100,22 +113,13 @@ public class Edit : PageModel {
             .ThenInclude(b => b.Guest)
             .FirstOrDefault(h => h.Id == Guid);
         if (hotel is null) {
-            context.Result = RedirectToPage("/Stores/Index");
+            context.Result = RedirectToPage("/Hotels/Index");
             return;
         }
         Hotel = hotel;
-        //Bookings = hotel.Bookings.ToList();
+        Bookings = hotel.Bookings.ToList();
         BookingsToDelete = hotel.Bookings.ToDictionary(b => b.Id, b => false); // corrected Bookings
-        var bookings = _bookings.Set
-            .Where(b => b.Hotel.Id == Guid)
-            .Select(b => new BookingDto(
-                b.Id,
-                b.Date, // ensure property names match
-                b.GuestId,
-                b.RoomId,
-                b.BookingDuration
-            ))
-            .ToList();
+
       //  EditBokings = bookings.ToDictionary(b => b.Id, b => b);
         EditBokings = _bookings.Set.Where(b => b.Hotel.Id == Guid)
             .ProjectTo<BookingDto>(_mapper.ConfigurationProvider)
