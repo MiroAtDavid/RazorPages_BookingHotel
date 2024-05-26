@@ -22,6 +22,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/hu/RiderProjects/BookMe/BookMe.WebApp/Pages/Hotels/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG90ZWxzL0FkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/hu/RiderProjects/BookMe/BookMe.WebApp/Pages/Hotels/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG90ZWxzL0RlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

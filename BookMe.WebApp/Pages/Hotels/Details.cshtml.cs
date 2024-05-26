@@ -42,23 +42,41 @@ public class Details : PageModel {
     }
     
     [FromRoute]
-    public Guid guid { get; set; }
+    public Guid Guid { get; set; }
     
     public Hotel? Hotel { get; set; }
-    
     public Booking NewBooking { get; set; }
-
     public IReadOnlyList<Booking> Bookings { get; private set; } = new List<Booking>();
     public Dictionary<Guid, BookingDto> EditBokings { get; set; } = new();
     public Dictionary<Guid, bool> BookingsToDelete { get; set; } = new();
     public IEnumerable<SelectListItem> RoomSelectList =>
         _room.Set.OrderBy(r => r.RoomType).Select(p => new SelectListItem(p.RoomType, p.Id.ToString()));
+
+    public IEnumerable<SelectListItem> GuestSelectListI =>
+        _guests.Set.OrderBy(g => g.Email).Select(p => new SelectListItem(p.Email, p.Id.ToString()));
     
-    public IActionResult OnPostEditBooking(Guid id, Guid bookingId, Dictionary<Guid, BookingDto> editbookings) {
+    public IActionResult OnPostNewBooking(Guid guid, BookingDto newBooking)
+    {
+        if (!ModelState.IsValid) { return Page(); }
+        var (success, message) = _bookings.Create(
+            hotelId: guid,
+            dateTime: newBooking.Date,
+            guestId: newBooking.GuestId,
+            roomId: newBooking.RoomId,
+            bookingDuration: newBooking.BookingDuration
+            );
+        if (!success) {
+            ModelState.AddModelError("", message!);
+            return Page();
+        }
+        return RedirectToPage();
+    }
+    
+    public IActionResult OnPostEditBooking(Guid id, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
         if (!ModelState.IsValid) { return Page(); }
         var booking = _bookings.FindById(bookingId);
         if (booking is null) { return RedirectToPage(); }
-        _mapper.Map(editbookings[bookingId], booking);
+        _mapper.Map(editBokings[bookingId], booking);
         var (success, message) = _bookings.Update(booking);
         if (!success) {
             ModelState.AddModelError("", message!);
@@ -70,37 +88,38 @@ public class Details : PageModel {
 
     
     public IActionResult OnGet(Guid guid) {
-        //var hotel = _hotels.FindById(guid);
-        var hotel = _hotels.Set
-            .Include(h => h.Bookings)
-            .ThenInclude(b => b.Room)
-            .Include(h => h.Bookings)
-            .ThenInclude(b => b.Guest) 
-            .FirstOrDefault(h => h.Id == guid);
-        if (hotel == null)
-            return RedirectToPage("Hotels/Index");
-        Hotel = hotel;
-        Bookings = hotel.Bookings.ToList();
         return Page();
     }
-    /*
+
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context) {
         // SELECT * FROM Stores INNER JOIN Offers ON (...)
         // INNER JOIN Product ON (...)
         var hotel = _hotels.Set
             .Include(h => h.Bookings)
-            //.ThenInclude(b => b.Room)
-            .FirstOrDefault(h => h.Id == guid);
+            .ThenInclude(b => b.Room)
+            .Include(h => h.Bookings)
+            .ThenInclude(b => b.Guest)
+            .FirstOrDefault(h => h.Id == Guid);
         if (hotel is null) {
-            context.Result = RedirectToPage("/Hotels/Index");
+            context.Result = RedirectToPage("/Stores/Index");
             return;
         }
+
         Hotel = hotel;
-        Bookings = hotel.Bookings.ToList();
-        BookingsToDelete = Bookings.ToDictionary(b => b.Id, o => false);
-        //EditBokings = _bookings.Set.Where(b => b.Hotel.Id == Guid)
-        //    .ProjectTo<BookingDto>(_mapper.ConfigurationProvider)
-        //    .ToDictionary(b => b.Id, b => b);
+        //Bookings = hotel.Bookings.ToList();
+        BookingsToDelete = hotel.Bookings.ToDictionary(b => b.Id, b => false); // corrected Bookings
+        var bookings = _bookings.Set
+            .Where(b => b.Hotel.Id == Guid)
+            .Select(b => new BookingDto(
+                b.Id,
+                b.Date, // ensure property names match
+                b.GuestId,
+                b.RoomId,
+                b.BookingDuration
+            ))
+            .ToList();
+
+        EditBokings = bookings.ToDictionary(b => b.Id, b => b);
     }
-    */
+
 }

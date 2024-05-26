@@ -28,9 +28,8 @@
         </tr>
     </thead>
     <tbody>
-    @foreach(var h in Model.Hotels)
-    {
-        var cssClass = h.BookingsCount < 10 ? "closed" : "";
+    @foreach(var h in Model.Hotels) {
+        var cssClass = h.BookingsCount > 14 ? "closed" : "";
         <tr class="@cssClass">
             <td>@h.Name</td>
             <td>
@@ -48,18 +47,14 @@
             <td>
                 <a class="ms-2" asp-page="/Hotels/Details" asp-route-guid="@h.Id"><i class="fa-solid fa-circle-info"></i></a>
                 <a class="ms-2" asp-page="/Hotels/Edit" asp-route-guid="@h.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a class="ms-2" asp-page="/Hotels/Add" asp-route-guid="@h.Id"><i class="fa-solid fa-plus"></i></a>
                 <a class="ms-2" asp-page="/Hotels/Delete" asp-route-guid="@h.Id"><i class="fa-solid fa-trash"></i></a>
             </td>
         </tr>
         <style>
-    .fa-star {
-        color: #cecfd1;
-    }
-
-    .fa-star.checked {
-        color: #3b73bc;
-    }
-</style>
+            .fa-star {color: #cecfd1;}
+            .fa-star.checked {color: #3b73bc;}
+        </style>
     }
     </tbody>
 </table>

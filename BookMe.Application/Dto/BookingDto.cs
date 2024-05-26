@@ -5,7 +5,7 @@ namespace BookMe.Dto;
 // TODO verification
 public record BookingDto(
         Guid Id,
-        DateTime DateTime,
+        DateTime Date,
         Guid GuestId,
         int RoomId,
         int BookingDuration

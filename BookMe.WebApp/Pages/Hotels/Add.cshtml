@@ -1,0 +1,67 @@
+@page "{guid}"
+@model BookMe.WebApp.Pages.Hotels.Add
+<h3>Hotel @Model.Hotel.Name</h3>
+
+<h4>New Booking</h4>
+
+<form method="post" asp-page-handler="NewBooking">
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="NewBooking.Guest">Guest</label>
+            <select class="form-select"
+                    asp-items="@Model.GuestSelectListI"
+                    asp-for="NewBooking.GuestId"></select>
+        </div>
+        <div class="col-6">
+            <label asp-for="NewBooking.Room">Room</label>
+            <select class="form-select"
+                    asp-items="@Model.RoomSelectList"
+                    asp-for="NewBooking.RoomId"></select>
+        </div>
+        <div class="col-6">
+            <label asp-for="NewBooking.Date">Date</label>
+            <input type="date" class="form-control" asp-for="NewBooking.Date"/>
+        </div>
+        <div class="col-6">
+            <label asp-for="NewBooking.BookingDuration">Days</label>
+            <input class="form-control" asp-for="NewBooking.BookingDuration"/>
+            <small>
+                <span class="text-danger" asp-validation-for="NewBooking.BookingDuration"></span>
+            </small>
+        </div>
+    </div>
+    <div class="text-danger" asp-validation-summary=ModelOnly></div>
+    <button class="mt-2 btn btn-primary">Save</button>
+</form>
+
+
+<h4>Bookings</h4>
+<table class="table table-sm">
+    <thead>
+    <tr>
+        <th>Guest</th>
+        <th>-</th>
+        <th>Email</th>
+        <th>Date</th>
+        <th>Days</th>
+        <th>Room Type</th>
+        <th>Room Price</th>
+        <th>Booking Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var b in Model.Hotel.Bookings.OrderBy(b => b.Date)) {
+    <tr>
+        <td>@b.Guest.LastName</td>
+        <td>@b.Guest.FirstName</td>
+        <td>@b.Guest.Email</td>
+        <td>@b.Date</td>
+        <td>@b.BookingDuration</td>
+        <td>@b.Room.RoomType</td>
+        <td>@b.Room.Price</td>
+        <td>@b.BookingPrice</td>
+    </tr>
+    }
+    </tbody>
+</table>
+

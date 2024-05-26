@@ -13,7 +13,7 @@ Implementieren Sie eine Webapplikation mit Razor Pages. Diese Applikation muss e
 
 - Die Webapplikation unterstützt alle CRUD Operationen (Create, Read, Update, Delete) gemäß den Beispielen aus dem Unterricht.
 
-- Eine Indexseite soll alle in einer Datenbanktabelle gespeicherten Objekte in Tabellenform anzeigen und Links zu einer Detailseite, zu einer  Editierseite sowie zu einer Löschseite für jeden Eintrag in der Tabelle  bereitstellen. Ein Link zu einer Seite zum Hinzufügen eines Objektes in  die Datenbank soll zur Verfügung stehen und zu jedem Eintrag in der  Tabelle soll auch die Anzahl der verbundenen Objekte (siehe nächster  Punkt) angezeigt werden.
+- *Eine Indexseite soll alle in einer Datenbanktabelle gespeicherten Objekte in Tabellenform anzeigen und Links zu einer Detailseite, zu einer  Editierseite sowie zu einer Löschseite für jeden Eintrag in der Tabelle  bereitstellen. Ein Link zu einer Seite zum Hinzufügen eines Objektes in  die Datenbank soll zur Verfügung stehen und zu jedem Eintrag in der  Tabelle soll auch die Anzahl der verbundenen Objekte (siehe nächster  Punkt) angezeigt werden.*
 
 - Eine Detailseite soll eine GUID als URL Parameter erhalten und die Daten des Objektes sowie eine Auflistung aller verbundenen Objekte darstellen.  (Die Detailseite des Beispiels aus dem Unterricht stellt den Namen von  einem Store und die dazugehörigen Offers dar.)
 
