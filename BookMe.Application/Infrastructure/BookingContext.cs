@@ -35,7 +35,7 @@ public class BookingContext : DbContext {
             .IsRequired();
         
         // Room
-        modelBuilder.Entity<Room>().HasDiscriminator(h => h.RoomType);
+        modelBuilder.Entity<Room>().HasKey(r => r.Id);
 
         // Employee
         modelBuilder.Entity<Employee>().HasKey(employee => employee.Id); 
