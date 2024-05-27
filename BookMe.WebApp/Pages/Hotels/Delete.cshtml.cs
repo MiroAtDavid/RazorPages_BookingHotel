@@ -91,17 +91,26 @@ public class Delete : PageModel {
         return Page();
     }
     
-    public IActionResult OnPostDelete(Guid guid)
-    {
-        var booking = _bookings.FindById(guid);
-        if (booking is null)
-        {
+    public IActionResult OnPostDelete(Guid guid, List<Guid> BookingsToDelete) {
+        if (BookingsToDelete == null || !BookingsToDelete.Any()) {
+            // No bookings selected for deletion, handle accordingly
             return RedirectToPage("/Hotels/Index");
         }
-        var (success, message) = _bookings.Delete(booking);
-        if (!success) { Message = message; }
+
+        foreach (var bookingId in BookingsToDelete) {
+            var booking = _bookings.FindById(bookingId);
+            if (booking != null) {
+                var (success, message) = _bookings.Delete(booking);
+                if (!success) {
+                    Message = message;
+                    // Optionally, add logic to handle failure for individual deletions
+                }
+            }
+        }
+
         return RedirectToPage("/Hotels/Index");
     }
+
     
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context) {
         // SELECT * FROM Stores INNER JOIN Offers ON (...)

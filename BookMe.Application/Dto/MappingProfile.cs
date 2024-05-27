@@ -8,9 +8,10 @@ public class MappingProfile : Profile {
     public MappingProfile() {
         CreateMap<HotelDto, Hotel>();  // HotelDto --> Hotel
         CreateMap<Hotel, HotelDto>();  // Hotel --> HotelDto
-        CreateMap<Booking, BookingDto>()
-            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
-
+        CreateMap<BookingDto, Booking>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore());
         CreateMap<Booking, BookingDto>();
+
     }
+    
 }

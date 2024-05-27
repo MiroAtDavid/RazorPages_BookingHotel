@@ -4,34 +4,34 @@
 
 <h4>Edit Bookings</h4>
 <form method="post" asp-page-handler="EditBooking">
-<table class="table table-sm">
-    <thead>
-    <tr>
-        <th>Guest</th>
-        <th>-</th>
-        <th>Email</th>
-        <th>Date</th>
-        <th>Days</th>
-        <th>Room Type</th>
-        <th>Room Price</th>
-        <th>Booking Price</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var b in Model.Hotel.Bookings.OrderBy(b => b.Date)) {
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th>Guest</th>
+            <th>-</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th>Days</th>
+            <th>Room Type</th>
+            <th>Room Price</th>
+            <th>Booking Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var b in Model.Hotel.Bookings.OrderBy(b => b.Date)) {
         <tr>
             <td>@b.Guest.LastName</td>
             <td>@b.Guest.FirstName</td>
             <td>@b.Guest.Email</td>
             <td>
-                <input asp-for="EditBokings[b.Id].Date">
+                <input asp-for="EditBokings[b.Id].Date" name="editBokings[@b.Id].Date">
                 <small>
                     <span class="text-danger" asp-validation-for='EditBokings[b.Id].Date'></span>
                 </small>
             </td>
             <td>
-                <input asp-for="EditBokings[b.Id].BookingDuration ">
+                <input asp-for="EditBokings[b.Id].BookingDuration" name="editBokings[@b.Id].BookingDuration">
                 <small>
                     <span class="text-danger" asp-validation-for='EditBokings[b.Id].BookingDuration'></span>
                 </small>
@@ -39,14 +39,15 @@
             <td>@b.Room.RoomType</td>
             <td>@b.Room.Price</td>
             <td>@b.BookingPrice</td>
-            <td><button class="btn btn-primary"
+            <td>
+                <button class="btn btn-primary"
                         type="submit"
                         asp-page-handler="EditBooking"
                         asp-route-bookingId="@b.Id">Save
-            </button>
+                </button>
+            </td>
         </tr>
-    }
-    </tbody>
-</table>
+        }
+        </tbody>
+    </table>
 </form>
-

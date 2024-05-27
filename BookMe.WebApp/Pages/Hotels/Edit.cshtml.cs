@@ -71,25 +71,35 @@ public class Edit : PageModel {
         }
         return RedirectToPage();
     }
-
-    public IActionResult OnPostEditBooking(Guid id, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
-        if (!ModelState.IsValid) { return Page(); }
-        var booking = _bookings.FindById(id);
-        if (booking is null) {
-            return RedirectToPage();
+    
+    public IActionResult OnPostEditBooking(Guid guid, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
+        if (!ModelState.IsValid) {
+            return Page();
         }
-        _mapper.Map(editBokings[bookingId], booking);
+
+        var booking = _bookings.FindById(bookingId);
+        if (booking == null) {
+            return RedirectToPage("/Hotels/Index");
+        }
+
+        // Get the updated booking DTO
+        var updatedBookingDto = editBokings[bookingId];
+
+        // Update only the BookingDuration property in the existing booking entity
+        booking.BookingDuration = updatedBookingDto.BookingDuration;
+        booking.Date = updatedBookingDto.Date; // Update the date property
+        booking.CalculateBookingPrice(); // Assuming CalculatePrice is the method to recalculate the price
         var (success, message) = _bookings.Update(booking);
         if (!success) {
             ModelState.AddModelError("", message!);
             return Page();
         }
-        return RedirectToPage();
+
+        return RedirectToPage("/Hotels/Edit");
     }
 
-    public IActionResult OnGet(Guid guid) {
-        return Page();
-    }
+
+
     
     public IActionResult OnPostDelete(Guid guid)
     {

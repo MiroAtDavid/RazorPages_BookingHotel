@@ -112,6 +112,7 @@ public class Add : PageModel {
                 b.Id,
                 b.Date, // ensure property names match
                 b.GuestId,
+                b.HotelId,
                 b.RoomId,
                 b.BookingDuration
             ))

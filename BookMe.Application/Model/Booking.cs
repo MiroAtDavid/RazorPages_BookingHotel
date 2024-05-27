@@ -32,7 +32,7 @@ public class Booking : IEntity<Guid>
     
     // Other Methods
     // Calculate booking price
-    private decimal CalculateBookingPrice() {
+    public decimal CalculateBookingPrice() {
         BookingPrice = Room.Price * BookingDuration;
         return BookingPrice;
     }

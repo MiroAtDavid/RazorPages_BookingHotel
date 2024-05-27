@@ -35,15 +35,38 @@ public abstract class Repository<TEntity, TKey> where TEntity : class, IEntity<T
         if (!HasPrimaryKey(entity)) {
             return (false, "Missing primary key.");
         }
+
+        // Attach the entity to the context
         _db.Set<TEntity>().Attach(entity);
-        _db.Entry(entity).State = EntityState.Modified;
-        try {
+
+        // Mark only the properties that have changed as modified
+        var entry = _db.Entry(entity);
+        foreach (var property in entry.Properties) {
+            if (property.Metadata.IsPrimaryKey()) {
+                property.IsModified = false; // Ensure the primary key is not marked as modified
+            } else {
+                var originalValue = property.OriginalValue;
+                var currentValue = property.CurrentValue;
+
+                if (!Equals(originalValue, currentValue)) {
+                    property.IsModified = true;
+                } else {
+                    property.IsModified = false;
+                }
+            }
+        }
+
+        try
+        {
             _db.SaveChanges();
-        } catch (DbUpdateException ex) {
+            return (true, string.Empty);
+        }
+        catch (DbUpdateException ex)
+        {
             return (false, ex.InnerException?.Message ?? ex.Message);
         }
-        return (true, string.Empty);
     }
+
     
     // Delete an existing entity from the database
     public virtual (bool success, string message) Delete(TEntity entity) {

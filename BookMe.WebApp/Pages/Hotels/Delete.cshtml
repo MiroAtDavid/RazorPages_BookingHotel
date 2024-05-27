@@ -3,7 +3,7 @@
 <h3>Hotel @Model.Hotel.Name</h3>
 
 <h4>Delete Bookings</h4>
-<form method="post" asp-page-handler="EditBooking">
+<form method="post" asp-page-handler="Delete">
     <table class="table table-sm">
         <thead>
         <tr>
@@ -30,7 +30,7 @@
             <td>@b.Room.Price</td>
             <td>@b.BookingPrice</td>
             <td>
-                <input class="form-check-input" asp-for="BookingsToDelete[b.Id]" />
+                <input class="form-check-input" type="checkbox" name="BookingsToDelete" value="@b.Id" />
             </td>
         </tr>
         }
