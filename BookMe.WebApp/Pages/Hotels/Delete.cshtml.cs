@@ -1,19 +1,17 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Globalization;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookMe.Dto;
 using BookMe.Infrastructure.Repositories;
 using BookMe.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
-namespace BookMe.WebApp.Pages.Hotels;
 
+namespace BookMe.WebApp.Pages.Hotels;
+[Authorize(Roles = "Admin")]
 public class Delete : PageModel {
     private readonly HotelRepository _hotels;
     private readonly BookingRepository _bookings;
@@ -53,43 +51,6 @@ public class Delete : PageModel {
         _room.Set.OrderBy(r => r.RoomType).Select(p => new SelectListItem(p.RoomType, p.Id.ToString()));
     public IEnumerable<SelectListItem> GuestSelectListI =>
         _guests.Set.OrderBy(g => g.Email).Select(p => new SelectListItem(p.Email, p.Id.ToString()));
-
-    public IActionResult OnPostNewBooking(Guid guid, BookingDto newBooking) {
-        if (!ModelState.IsValid) {
-            return Page(); 
-        }
-        var (success, message) = _bookings.Create(
-            hotelId: guid,
-            dateTime: newBooking.Date,
-            guestId: newBooking.GuestId,
-            roomId: newBooking.RoomId,
-            bookingDuration: newBooking.BookingDuration
-        );
-        if (!success) {
-            ModelState.AddModelError("", message!);
-            return Page();
-        }
-        return RedirectToPage();
-    }
-
-    public IActionResult OnPostEditBooking(Guid id, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
-        if (!ModelState.IsValid) { return Page(); }
-        var booking = _bookings.FindById(id);
-        if (booking is null) {
-            return RedirectToPage();
-        }
-        _mapper.Map(editBokings[bookingId], booking);
-        var (success, message) = _bookings.Update(booking);
-        if (!success) {
-            ModelState.AddModelError("", message!);
-            return Page();
-        }
-        return RedirectToPage();
-    }
-
-    public IActionResult OnGet(Guid guid) {
-        return Page();
-    }
     
     public IActionResult OnPostDelete(Guid guid, List<Guid> BookingsToDelete) {
         if (BookingsToDelete == null || !BookingsToDelete.Any()) {
@@ -108,7 +69,7 @@ public class Delete : PageModel {
             }
         }
 
-        return RedirectToPage("/Hotels/Index");
+        return RedirectToPage("/Hotels/Delete");
     }
 
     
@@ -133,6 +94,5 @@ public class Delete : PageModel {
         EditBokings = _bookings.Set.Where(b => b.Hotel.Id == Guid)
             .ProjectTo<BookingDto>(_mapper.ConfigurationProvider)
             .ToDictionary(b => b.Id, b => b);
-        
     }
 }

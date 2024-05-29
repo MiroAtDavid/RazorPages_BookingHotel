@@ -27,7 +27,7 @@ public class BookingContextTest {
     [Fact]
     public void SeedDatabaseTest() {
         using var db = GetDatabase(deleteDb: true);
-        db.Seed();
+        db.Seed(new CryptService());
         // Multiple assert statements should be avoided in real unit tests, but in this case
         // the database is tested, not the program logic.
         Assert.True(db.Rooms.Count() == 400);

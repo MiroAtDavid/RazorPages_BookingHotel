@@ -5,6 +5,7 @@ using AutoMapper.QueryableExtensions;
 using BookMe.Dto;
 using BookMe.Infrastructure.Repositories;
 using BookMe.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,6 +15,7 @@ using SQLitePCL;
 
 namespace BookMe.WebApp.Pages.Hotels;
 
+[Authorize(Roles = "Admin, Owner")]
 public class Edit : PageModel {
     private readonly HotelRepository _hotels;
     private readonly BookingRepository _bookings;
@@ -53,24 +55,6 @@ public class Edit : PageModel {
         _room.Set.OrderBy(r => r.RoomType).Select(p => new SelectListItem(p.RoomType, p.Id.ToString()));
     public IEnumerable<SelectListItem> GuestSelectListI =>
         _guests.Set.OrderBy(g => g.Email).Select(p => new SelectListItem(p.Email, p.Id.ToString()));
-
-    public IActionResult OnPostNewBooking(Guid guid, BookingDto newBooking) {
-        if (!ModelState.IsValid) {
-            return Page(); 
-        }
-        var (success, message) = _bookings.Create(
-            hotelId: guid,
-            dateTime: newBooking.Date,
-            guestId: newBooking.GuestId,
-            roomId: newBooking.RoomId,
-            bookingDuration: newBooking.BookingDuration
-        );
-        if (!success) {
-            ModelState.AddModelError("", message!);
-            return Page();
-        }
-        return RedirectToPage();
-    }
     
     public IActionResult OnPostEditBooking(Guid guid, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
         if (!ModelState.IsValid) {
@@ -96,21 +80,6 @@ public class Edit : PageModel {
         }
 
         return RedirectToPage("/Hotels/Edit");
-    }
-
-
-
-    
-    public IActionResult OnPostDelete(Guid guid)
-    {
-        var booking = _bookings.FindById(guid);
-        if (booking is null)
-        {
-            return RedirectToPage("/Hotels/Index");
-        }
-        var (success, message) = _bookings.Delete(booking);
-        if (!success) { Message = message; }
-        return RedirectToPage("/Hotels/Index");
     }
     
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context) {

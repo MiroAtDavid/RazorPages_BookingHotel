@@ -7,6 +7,7 @@ public class BookingContext : DbContext {
     
     public BookingContext(DbContextOptions opt) : base(opt) { }
     public DbSet<Hotel> Hotels => Set<Hotel>();
+    public DbSet<User> Users => Set<User>();
     public DbSet<Room> Rooms => Set<Room>();
     public DbSet<Guest> Guests => Set<Guest>();
     public DbSet<Booking> Bookings => Set<Booking>();
@@ -58,10 +59,20 @@ public class BookingContext : DbContext {
     }
 
     // Creating Test Data with Bogus Faker
-    public void Seed() {
-        
+    public void Seed(ICryptService cryptService) {
         // Random sed num for database
         Randomizer.Seed = new Random(1358);
+        
+        // Admin
+        var adminSalt = cryptService.GenerateSecret(256);
+        var admin = new User(
+            username: "admin",
+            salt: adminSalt,
+            passwordHash: cryptService.GenerateHash(adminSalt, "1234"),
+            usertype: Usertype.Admin);
+        Users.Add(admin);
+        SaveChanges();
+
 
         // Address data with faker
         var addresses = new Faker<Address>("de").CustomInstantiator(f => new Address(
@@ -87,11 +98,21 @@ public class BookingContext : DbContext {
         SaveChanges();
         
         // Hotel data with faker
-        var hotels = new Faker<Hotel>("de").CustomInstantiator(f => new Hotel(
-                name: f.Company.CompanyName(),
-                stars: f.PickRandom<Stars>(),
-                address: f.Random.ListItem(addresses)
-            ))
+        var i = 0;
+        var hotels = new Faker<Hotel>("de").CustomInstantiator(f => {
+                var name = f.Company.CompanyName();
+                var salt = cryptService.GenerateSecret(256);
+                var username = $"hotel{++i:000}";
+                return new Hotel(
+                    name: f.Company.CompanyName(),
+                    stars: f.PickRandom<Stars>(),
+                    address: f.Random.ListItem(addresses),
+                    manager: new User(
+                        username: username,
+                        salt: salt,
+                        passwordHash: cryptService.GenerateHash(salt, "1234"),
+                        usertype: Usertype.Owner));
+            })
             .Generate(20)
             .ToList();
         Hotels.AddRange(hotels);

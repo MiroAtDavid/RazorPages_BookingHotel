@@ -8,6 +8,8 @@ public class Hotel : IEntity<Guid> {
     public Stars Stars { get; set; }
     public int AddressId { get; set; }
     public virtual Address Address { get; private set; }
+    public Guid? ManagerId { get; set; }
+    public User? Manager { get; set; }
     protected List<Room> _hotelRooms = new();
     public virtual IReadOnlyCollection<Room> HotelRooms => _hotelRooms;
     protected List<Employee> _hotelEmployees = new();
@@ -17,11 +19,12 @@ public class Hotel : IEntity<Guid> {
     public Random _random = new Random();
     
     // Constructor 
-    public Hotel(string name, Stars stars, Address address) {
+    public Hotel(string name, Stars stars, Address address, User? manager = null) {
         Id = new Guid();
         Name = name;
         Stars = stars;
         Address = address;
+        Manager = manager;
     }
     
     // Parameterless construcotr

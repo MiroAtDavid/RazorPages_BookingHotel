@@ -70,21 +70,6 @@ public class Add : PageModel {
         return RedirectToPage();
     }
     
-    public IActionResult OnPostEditBooking(Guid id, Guid bookingId, Dictionary<Guid, BookingDto> editBokings) {
-        if (!ModelState.IsValid) { return Page(); }
-        var booking = _bookings.FindById(bookingId);
-        if (booking is null) { return RedirectToPage(); }
-        _mapper.Map(editBokings[bookingId], booking);
-        var (success, message) = _bookings.Update(booking);
-        if (!success) {
-            ModelState.AddModelError("", message!);
-            return Page();
-        }
-        return RedirectToPage();
-    }
-    
-
-    
     public IActionResult OnGet(Guid guid) {
         return Page();
     }
