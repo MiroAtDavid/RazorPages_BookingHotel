@@ -25,11 +25,9 @@ public class IndexModel : PageModel {
 
     // TODO
     // Missing HotelRepository User Manager Entry
-    /*
-    public bool CanEditHotel(Guid hotelGuid) {
+    
+    public bool CanEditHotel(Guid hotelGuid) =>
         _authService.IsAdmin ||
             Hotels.FirstOrDefault(h => h.Id == hotelGuid)?.Manager?.Username == _authService.Username;
-    }
-    */
 }
  

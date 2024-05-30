@@ -1,0 +1,12 @@
+@page "{guid}"
+@model BookMe.WebApp.Pages.Hotels.DeleteHotel
+
+<h3>Delete Hotel</h3>
+
+<div class="border border-danger p-3">
+    <p>Delete Hotel @Model.Hotel.Name?</p>
+    <form method="post">
+        <button asp-page-handler="Delete"  type="submit" class="btn btn-danger">Yes</button>
+        <button asp-page-handler="Cancel" type="submit" class="btn btn-secondary">No</button>
+    </form>
+</div>

@@ -1,5 +1,7 @@
 @page
+@inject BookMe.AuthService AuthService;
 @model BookMe.WebApp.Pages.Hotels.IndexModel
+
 @section head {
     <style>
         .closed {
@@ -7,6 +9,7 @@
         }
     </style>
 }
+
 <h3>Hotels</h3>
 <p>@Model.Hotels.Count Hotels found. Created at @DateTime.Now.ToString("HH:mm").</p>
 
@@ -45,10 +48,15 @@
             <td>@h.Address.City</td>
             <td>@h.BookingsCount</td>
             <td>
-                <a class="ms-2" asp-page="/Hotels/Details" asp-route-guid="@h.Id"><i class="fa-solid fa-circle-info"></i></a>
-                <a class="ms-2" asp-page="/Hotels/Edit" asp-route-guid="@h.Id"><i class="fa-regular fa-pen-to-square"></i></a>
-                <a class="ms-2" asp-page="/Hotels/Add" asp-route-guid="@h.Id"><i class="fa-solid fa-plus"></i></a>
-                <a class="ms-2" asp-page="/Hotels/Delete" asp-route-guid="@h.Id"><i class="fa-solid fa-trash"></i></a>
+                @if (Model.CanEditHotel(h.Id)) {
+                    <a class="ms-2" asp-page="/Hotels/Details" asp-route-guid="@h.Id"><i class="fa-solid fa-circle-info"></i></a>
+                    <a class="ms-2" asp-page="/Hotels/Edit" asp-route-guid="@h.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a class="ms-2" asp-page="/Hotels/Add" asp-route-guid="@h.Id"><i class="fa-solid fa-plus"></i></a>
+                    @if (AuthService.HasRole("Admin")) {
+                        <a class="ms-2" asp-page="/Hotels/Delete" asp-route-guid="@h.Id"><i class="fa-solid fa-minus"></i></a>
+                        <a class="ms-2" asp-page="/Hotels/DeleteHotel" asp-route-guid="@h.Id"><i class="fa-solid fa-trash"></i></a>
+                    }
+                }
             </td>
         </tr>
         <style>

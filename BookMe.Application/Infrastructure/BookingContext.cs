@@ -155,5 +155,6 @@ public class BookingContext : DbContext {
         Bookings.AddRange(bookings);
         SaveChanges();
 
+
     }
 }

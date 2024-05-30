@@ -1,5 +1,6 @@
 @page "{guid}"
 @model BookMe.WebApp.Pages.Hotels.Delete
+
 <h3>Hotel @Model.Hotel.Name</h3>
 
 <h4>Delete Bookings</h4>
@@ -15,7 +16,9 @@
             <th>Room Type</th>
             <th>Room Price</th>
             <th>Booking Price</th>
-            <th>Delete?</th>
+            <th>
+                <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)" />
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -41,3 +44,13 @@
         asp-page-handler="Delete">Delete Selected</button>
 </form>
 
+<script>
+    function toggleSelectAll(source) {
+        checkboxes = document.getElementsByName('BookingsToDelete');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    }
+</script>

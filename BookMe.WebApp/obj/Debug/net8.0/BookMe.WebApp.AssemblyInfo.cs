@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookMe.WebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d3e5d2b26dfe28a8275ef4460f454b86277b4af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+006f8b6e099a813a597d613234fddbed7007b9cd")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookMe.WebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookMe.WebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

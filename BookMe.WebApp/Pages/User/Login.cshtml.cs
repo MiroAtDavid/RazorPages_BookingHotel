@@ -34,6 +34,6 @@ public class Login : PageModel {
                 Message = message;
                 return Page();
             }
-            return Redirect(ReturnUrl ?? "/");
+            return Redirect(ReturnUrl ?? "/Hotels/Index");
         }
     }

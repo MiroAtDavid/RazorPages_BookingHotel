@@ -16,8 +16,6 @@ public class Add : PageModel {
   private readonly HotelRepository _hotels;
     private readonly BookingRepository _bookings;
     private readonly GuestRepository _guests;
-    private readonly AddressRepository _addresses;
-    private readonly EmployeeRepository _employees;
     private readonly RoomRepository _room;
     private readonly IMapper _mapper;
     
@@ -34,8 +32,6 @@ public class Add : PageModel {
         _hotels = hotels;
         _bookings = bookings;
         _guests = guests;
-        _addresses = addresses;
-        _employees = employees;
         _room = rooms;
     }
     
@@ -44,7 +40,6 @@ public class Add : PageModel {
     
     public Hotel? Hotel { get; set; }
     public Booking NewBooking { get; set; }
-    public IReadOnlyList<Booking> Bookings { get; private set; } = new List<Booking>();
     public Dictionary<Guid, BookingDto> EditBokings { get; set; } = new();
     public Dictionary<Guid, bool> BookingsToDelete { get; set; } = new();
     public IEnumerable<SelectListItem> RoomSelectList =>

@@ -50,7 +50,7 @@ public class AuthService
 
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(4),
             };
 
             await HttpContext.SignInAsync(

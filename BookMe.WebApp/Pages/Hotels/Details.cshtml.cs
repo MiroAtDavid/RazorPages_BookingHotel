@@ -13,6 +13,7 @@ public class Details : PageModel {
 
     private readonly AuthService _authService;
     private readonly HotelRepository _hotels;
+    
     public Details(IMapper mapper, HotelRepository hotels, AuthService authService) {
         _hotels = hotels;
         _authService = authService;
@@ -40,8 +41,7 @@ public class Details : PageModel {
         }
 
         var username = _authService.Username;
-        if (!_authService.HasRole("Admin") && username != hotel.Manager?.Username)
-        {
+        if (!_authService.HasRole("Admin") && username != hotel.Manager?.Username) {
             context.Result = new ForbidResult();
         }
         Hotel = hotel;

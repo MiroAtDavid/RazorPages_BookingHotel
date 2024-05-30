@@ -9,13 +9,14 @@ public class HotelRepository : Repository<Hotel, Guid>
         string Name,
         Stars Stars,
         Address Address,
+        User? Manager,
         int? BookingsCount);
     
     public HotelRepository(BookingContext db) : base(db) {}
 
     public IReadOnlyList<HotelWithBookingCount> GetHotelWithBookingCounts() {
         return _db.Hotels
-            .Select(h => new HotelWithBookingCount(h.Id, h.Name,h.Stars, h.Address, h.Bookings.Count()))
+            .Select(h => new HotelWithBookingCount(h.Id, h.Name,h.Stars, h.Address,h.Manager, h.Bookings.Count()))
             .ToList();
     }
 

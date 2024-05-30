@@ -21,6 +21,8 @@
         <div class="col-6">
             <label asp-for="NewBooking.Date">Date</label>
             <input type="date" class="form-control" asp-for="NewBooking.Date"/>
+            <span class="text-danger" asp-validation-for='NewBooking.Date'></span>
+
         </div>
         <div class="col-6">
             <label asp-for="NewBooking.BookingDuration">Days</label>
